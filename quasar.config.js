@@ -69,7 +69,17 @@ module.exports = configure(function (ctx) {
       chainWebpack(chain) {
         chain
           .plugin("eslint-webpack-plugin")
-          .use(ESLintPlugin, [{ extensions: ["js", "vue"] }]);
+          .use(ESLintPlugin, [{ extensions: ["js", "vue"] }])
+          .end()
+          .module.rule("pdf")
+          .test(/\.pdf$/)
+          .use("file-loader")
+          .loader("file-loader")
+          .options({
+            name: "[name].[ext]",
+            outputPath: "pdf/",
+          })
+          .end();
       },
     },
 
