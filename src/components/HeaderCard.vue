@@ -1,12 +1,64 @@
 <template>
-  <div class="q-px-xs-md q-px-sm-lg q-px-sm-xl q-py-xs-sm q-py-sm-md" flat>
+  <div
+    class="q-px-xs-md q-px-sm-lg q-px-sm-xl q-py-xs-sm q-py-sm-md q-pb-none"
+    flat
+  >
     <div class="row reverse-wrap q-px-xs-sm q-px-sm-xl q-py-xs-sm q-py-sm-md">
       <div class="col-12 col-sm-7">
-        <div class="text-overline text-h1">test</div>
+        <div class="text-overline text-h1" data-v-8db16f10="">Florian Batt</div>
+        <p>{{ selectedLanguage }}</p>
         <div
           id="title-header"
           class="wave-word text-h5 q-mt-sm q-mb-xs text-weight-bold"
         >
+          <span>R</span>
+          <span>e</span>
+          <span>c</span>
+          <span>h</span>
+          <span>e</span>
+          <span>r</span>
+          <span>c</span>
+          <span>h</span>
+          <span>e</span>
+
+          <span>&nbsp;</span>
+          <span>a</span>
+          <span>l</span>
+          <span>t</span>
+          <span>e</span>
+          <span>r</span>
+          <span>n</span>
+          <span>a</span>
+          <span>n</span>
+          <span>c</span>
+          <span>e</span>
+
+          <span>&nbsp;</span>
+          <span id="as">d</span>
+          <span>é</span>
+          <span>v</span>
+          <span>e</span>
+          <span>l</span>
+          <span>o</span>
+          <span>p</span>
+          <span>p</span>
+          <span>e</span>
+          <span>u</span>
+          <span>r</span>
+          <span>&nbsp;</span>
+          <span>w</span>
+          <span>e</span>
+          <span>b</span>
+
+          <span>&nbsp;</span>
+          <span>d</span>
+          <span>e</span>
+          <span>v</span>
+          <span>o</span>
+          <span>p</span>
+          <span>s</span>
+
+          <!-- For English version
           <span>L</span>
           <span>o</span>
           <span>o</span>
@@ -49,12 +101,13 @@
           <span>p</span>
           <span>e</span>
           <span>r</span>
+        -->
 
           <!--Looking for an intership as Web developer-->
         </div>
         <div class="text-caption text-grey">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          L'EPSI me soutient dans cette collaboration qui est pour moi une
+          oppotunité tant pour la formation que pour mon avenir professionnel.
         </div>
         <div class="row q-pa-md" style="">
           <div
@@ -76,11 +129,11 @@
       </div>
 
       <div class="col-12 col-sm-5 q-pb-lg q-pb-sm-none flex flex-center">
-        <div class="pos" style="width: 150px; height: 150px">
+        <div class="pos" style="width: 100px; height: 100px">
           <img
-            width="150"
+            width="100"
             class="absolute"
-            src="../assets/Photo-cv.png"
+            src="../assets/Photo-cv2.png"
             style="
               position: absolute;
               top: 50%;
@@ -88,6 +141,19 @@
               transform: translate(-50%, -50%);
             "
           />
+          <div
+            style="
+              width: 135px;
+              height: 135px;
+              border-radius: 100px;
+              background: #9e9e9e;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -45%);
+            "
+          ></div>
+          <!--
           <Vue3Lottie
             class="vue3-lottie"
             :animationData="AstronautJSON"
@@ -101,7 +167,7 @@
               transform: translate(-50%, -50%);
             "
           />
-        </div>
+        --></div>
       </div>
     </div>
 
@@ -120,7 +186,7 @@
         class="col-auto"
         padding="xs md"
         color="primary"
-        label="Let's talk"
+        label="Me contacter"
         no-caps
       />
     </div>
@@ -128,7 +194,7 @@
 </template>
 
 <script>
-import { Vue3Lottie } from "vue3-lottie";
+// import { Vue3Lottie } from "vue3-lottie";
 import "vue3-lottie/dist/style.css";
 
 import AstronautJSON from "../assets/Lottie-water.json";
@@ -137,7 +203,7 @@ import { reactive, onMounted } from "vue";
 
 export default {
   components: {
-    Vue3Lottie,
+    // Vue3Lottie,
   },
   data() {
     return {

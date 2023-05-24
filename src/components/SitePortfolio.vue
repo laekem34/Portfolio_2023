@@ -165,10 +165,12 @@
             </div>
             <div id="btn" class="button col-12 self-end q-pt-xs-lg">
               <q-btn
+                :href="link"
+                target="_blank"
                 padding="xs md"
                 outline
                 color="primary"
-                label="Look"
+                label="Consulter"
                 no-caps
               />
             </div>

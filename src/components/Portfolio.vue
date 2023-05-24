@@ -1,25 +1,20 @@
 <template>
-  <div id="portfolio" class="q-pa-xs-md q-pa-md-xl">
-    <!-- TODO 
-Ajouter un effet de police qui grossi quand on descend le scroll
--->
-
-    <h2
-      id="title-h2"
-      class="text-h1 text-center"
-      style="font-family: 'RobotoFlex', sans-serif"
-    >
-      <span id="p">P</span>
-      <span id="o">o</span>
-      <span id="r">r</span>
-      <span id="t">t</span>
-      <span id="f">f</span>
-      <span id="o_2">o</span>
-      <span id="l">l</span>
-      <span id="i">i</span>
-      <span id="o_3">o</span>
-    </h2>
-
+  <h2
+    id="portfolio"
+    class="text-h1 text-center"
+    style="font-family: 'RobotoFlex', sans-serif"
+  >
+    <span id="p">P</span>
+    <span id="o">o</span>
+    <span id="r">r</span>
+    <span id="t">t</span>
+    <span id="f">f</span>
+    <span id="o_2">o</span>
+    <span id="l">l</span>
+    <span id="i">i</span>
+    <span id="o_3">o</span>
+  </h2>
+  <div class="q-pa-xs-md q-pa-md-xl">
     <SitePortfolio
       v-for="(links, index) in linksList"
       :key="index"
@@ -45,35 +40,29 @@ export default defineComponent({
   setup() {
     const linksList = reactive([
       {
-        title: "Linking Platform",
-        text: "This project is a linking platform to link with your neighboorhood, you can <strong>post</strong> and <strong>share</strong> share stuff, like other users and send <strong>messages</strong>.I made this project during my internship and got my DWWM degree presenting this website. The time to deliver beeing limited I used bootstrap for the style. I particulary enjoyed using Symfony 6, using the bundles and composants such as mailer, rate limiter. It also was really helpfull while dealing with unit tests.",
+        //  title: "Linking Platform",
+        title: "Plate-forme de mise en realtion",
+        // text: "This project is a linking platform to link with your neighboorhood, you can <strong>post</strong> and <strong>share</strong> share stuff, like other users and send <strong>messages</strong>.I made this project during my internship and got my DWWM degree presenting this website. The time to deliver beeing limited I used bootstrap for the style. I particulary enjoyed using Symfony 6, using the bundles and composants such as mailer, rate limiter. It also was really helpfull while dealing with unit tests.",
+        text: "Projet réalisé pendant mon stage pour l'obtention de mon titre de Développeur Web et Web Mobile. <br><br> <strong>Fonctionnalités:</strong> <ul><li><span style='text-decoration: underline;'>Profil</span>: Inscription (vérification par e-mail), connexion, pseudo, mot de passe, photo, consultation de ses likes.</li> <li><span style='text-decoration: underline;'>Demandes</span>: Consultation des demandes des autres utilisateurs, ajout de demandes, consultation de ses demandes, edition de ses demandes, suppression de ses demandes.</li><li> <span style='text-decoration: underline;'>Messages</span>:  Envoie de messages à l'auteur d'une demande, réponse à un message reçu, consultation de sa messagerie, like d'autres utilisateurs.</li></ul><br><br><span style='text-decoration: underline;'><strong>Pour tester le site</strong></span> => Email: toto@toto.fr - Mdp: tototo",
         caption: [
           "quasar.dev",
           "github.com/quasarframework",
           "chat.quasar.dev",
         ],
         icon: ["Symfony", "php", "JavaScript", "Bootstrap"],
-        link: [
-          "https://quasar.dev",
-          "https://github.com/quasarframework",
-          "https://chat.quasar.dev",
-        ],
+        link: "https://ask.florian-dev.com",
         image: "ask.png",
       },
       {
         title: "Portfolio",
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        text: "Projet personnel avec pour objectif de réaliser une nouvelle version de mon portfolio en Vue.js en utilisant Quasar.<br> Utilisation d'une font variable et animation lottie.",
         caption: [
           "quasar.dev",
           "github.com/quasarframework",
           "chat.quasar.dev",
         ],
         icon: ["Vue-js", "Quasar", "JavaScript"],
-        link: [
-          "https://quasar.dev",
-          "https://github.com/quasarframework",
-          "https://chat.quasar.dev",
-        ],
+        link: "https://portfolio.florian-dev.com/",
         image: "portfolio.png",
       },
     ]);
@@ -90,7 +79,7 @@ export default defineComponent({
   }),
   mounted() {
     // Récupère l'élément que l'on souhaite suivre
-    const titleH2 = document.getElementById("title-h2");
+    const titleH2 = document.getElementById("portfolio");
 
     // Récupère la position de l'élément
     const elementPosition =
@@ -154,16 +143,18 @@ export default defineComponent({
       //   Math.exp(Math.sqrt(visiblePercentage)) / Math.exp(Math.sqrt(100));
       const Maxlimite = 800;
 
-      //EFFET CROISEMENT
+      ///////////////////////////
+      ////////EFFET CROISEMENT OMBRES/////////////////////////////////////////
+      ///////////////////////////
 
       let shadowB = 0;
       shadowB = (titleH2.getBoundingClientRect().top - window.scrollY) / 50;
       let shadow2 = -shadowB;
-      if (shadow2 > 0.4) {
-        shadow2 = 0.4;
+      if (shadow2 > 0.2) {
+        shadow2 = 0.2;
       }
-      if (shadowB < -0.8) {
-        shadowB = -0.8;
+      if (shadowB < -0.2) {
+        shadowB = -0.2;
       }
       const widthOfScreen = window.innerWidth;
       // let letterSpacing = (widthOfScreen * 0.001 * fontPlus) / 60;
@@ -183,8 +174,15 @@ export default defineComponent({
         "px " +
         shadow2 +
         "px 0px grey";
-      titleH2.style.opacity = visiblePercentage / 20 - 1;
-      //EFFET 3D
+
+      // OPTION effet opacité
+
+      // titleH2.style.opacity = visiblePercentage / 20 - 1;
+
+      ////////////
+      ////////EFFET 3D/////////////////////////////////////////
+      ////////////
+
       // let fontPlus = 600;
       // let shadowB = 0;
 
@@ -256,8 +254,10 @@ h2 {
     font-weight: 400;
   }
 }
-#title-h2 {
+#portfolio {
   font-size: 5em;
   color: rgba(255, 255, 255, 0);
+  margin-top: 16px;
+  margin-bottom: 8px;
 }
 </style>

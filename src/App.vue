@@ -24,8 +24,12 @@ body {
   font-style: normal;
   font-variation-settings: "wght" 400, "opsz" 100%;
 }
-
-a {
+ul {
+  list-style-type: none;
+    padding: 0;
+  margin: 0;
+}
+a{
   text-decoration: none;
   color: black;
 }

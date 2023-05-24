@@ -1,27 +1,27 @@
 <template>
   <div class="q-pa-md">
     <q-toolbar class="text-black">
-      <!--
-      <q-btn id="logo" round class="border-1" flat label="FB">
-        <q-tooltip
-          anchor="center left"
-          self="center right"
-          transition-show="scale"
-          transition-hide="scale"
-          class="bg-primary text-body2"
-          >Florian BATT</q-tooltip
+      <a href="https://www.epsi.fr">
+        <q-img q-m-lg style="width: 24px" src="../assets/Epsi.png" />
+        <span style="font-size: 16px">&nbsp;epsi&nbsp;</span>
+        <span style="font-size: 10px"
+          >&nbsp;école d'ingénierie informatique</span
         >
-      </q-btn>
-        -->
+      </a>
+
       <q-space />
 
-      <!--
-        notice shrink property since we are placing it
-        as child of QToolbar
-      -->
       <q-tabs id="languages" class="" shrink>
         <!-- <q-tab name="What-I-do" label="What I do" no-caps />  
-         <q-tab round name="About" label="About" no-caps />  -->
+        
+        <q-tab round name="About" label="About" no-caps /> 
+
+
+
+
+        Working on FR & EN for next version
+        -->
+
         <q-tab
           v-for="(value, key) in languages[selectedLanguage]"
           :key="key"
@@ -30,7 +30,7 @@
           :name="key"
           :label="value"
           no-caps
-          @click="changeLanguage(selectedLanguage)"
+          @click="passVariableToParent(value)"
         />
       </q-tabs>
     </q-toolbar>
@@ -58,13 +58,14 @@ export default {
         language2: "English",
       },
     });
-    function changeLanguage() {
-      if (selectedLanguage.value == "FR") {
-        selectedLanguage.value = "EN";
-        console.log("EN :" + selectedLanguage.value);
-      } else {
+    function changeLanguage(lang) {
+      console.log(lang);
+      if (lang == "Francais" || lang == "French") {
         selectedLanguage.value = "FR";
-        console.log("FR :" + selectedLanguage.value);
+        console.log("selectedLanguage :" + selectedLanguage.value);
+      } else {
+        selectedLanguage.value = "EN";
+        console.log("selectedLanguage :" + selectedLanguage.value);
       }
       return selectedLanguage;
     }
@@ -74,6 +75,13 @@ export default {
       languages,
       changeLanguage,
     };
+  },
+  methods: {
+    passVariableToParent(lang) {
+      console.log("pass");
+      const variable = this.changeLanguage(lang);
+      this.$emit("variable-changed", variable);
+    },
   },
   mounted() {
     // Simule un clic sur l'onglet 'french'

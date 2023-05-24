@@ -6,14 +6,13 @@
           class="row reverse-wrap q-px-xs-sm q-px-sm-xl q-py-xs-sm q-py-sm-md"
         >
           <div class="col-12 col-sm-7">
-            <h2 class="text-bold">Me contacter</h2>
-            <div class="text-h5 q-mt-sm q-mb-xs text-weight-bold">
-              Looking for an intership as Web developer
+            <h2 class="text-boldn q-mt-none q-my-sm-xl">Me contacter</h2>
+            <!-- <div class="text-h5 q-mt-sm q-mb-xs text-weight-bold">
+            Titre d'accroche
             </div>
             <div class="text-caption text-grey">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
+              Phrase d'accroche
+            </div>-->
             <div class="row" style="">
               <div
                 v-for="(link, i) in linksList"
@@ -44,9 +43,21 @@
             </div>
           </div>
 
-          <div class="col-12 col-sm-5 flex flex-center">
-            <q-avatar size="150px">
-              <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+          <div class="col-12 col-sm-5 flex flex-center q-py-lg">
+            <q-avatar style="height: 200px">
+              <Vue3Lottie
+                class="vue3-lottie"
+                :animationData="ContactJSON"
+                :height="200"
+                :width="200"
+                :speed="0.25"
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                "
+              />
             </q-avatar>
           </div>
         </div>
@@ -55,6 +66,17 @@
           class="row justify-between q-gutter-md q-pa-xs-sm q-pa-sm-xl q-py-xs-xl"
         >
           <q-btn
+            :href="cvUrl"
+            download="Portfolio-Florian-Batt.pdf"
+            class="col-5"
+            padding="md xl"
+            color="primary"
+            label="Télécharger mon CV"
+            icon="download"
+            no-caps
+          />
+          <!--         
+            q-btn
             :href="portfolioUrl"
             download="Portfolio-Florian-Batt.pdf"
             class="col-5"
@@ -64,8 +86,7 @@
             label="Download my portfolio"
             icon="download"
             no-caps
-          />
-
+          /> 
           <q-btn
             :href="cvUrl"
             download="CV-Florian-Batt.pdf"
@@ -76,6 +97,7 @@
             icon="download"
             no-caps
           />
+          -->
         </div>
       </div>
     </q-layout>
@@ -87,9 +109,21 @@ import cv from "../assets/CV_Florian_Batt_2023.pdf";
 import portfolio from "../assets/portfolio.pdf";
 import { defineComponent } from "vue";
 import { reactive } from "vue";
+import { Vue3Lottie } from "vue3-lottie";
+import "vue3-lottie/dist/style.css";
+
+import ContactJSON from "../assets/Lottie-contact.json";
 
 export default defineComponent({
   name: "TheContact",
+  components: {
+    Vue3Lottie,
+  },
+  data() {
+    return {
+      ContactJSON,
+    };
+  },
   setup() {
     const linksList = reactive([
       {
