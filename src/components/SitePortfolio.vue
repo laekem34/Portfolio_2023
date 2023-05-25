@@ -138,6 +138,7 @@
               <div class="row q-pb-lg">
                 <div class="col-auto text-subtitle1 text-weight-bold q-mt-md">
                   <span>{{ title }} </span>
+                  <p>{{ receivedVariable }}</p>
                 </div>
                 <div class="col-7">
                   <div class="row justify-start" style="height: 100%">
@@ -220,6 +221,10 @@ export default defineComponent({
     },
     image: {
       type: Array,
+      required: true,
+    },
+    receivedVariable: {
+      type: String,
       required: true,
     },
   },

@@ -14,8 +14,10 @@
     <span id="i">i</span>
     <span id="o_3">o</span>
   </h2>
+
   <div class="q-pa-xs-md q-pa-md-xl">
     <SitePortfolio
+      :receivedVariable="receivedVariable"
       v-for="(links, index) in linksList"
       :key="index"
       :title="links.title"
@@ -77,6 +79,12 @@ export default defineComponent({
       required: true,
     },
   }),
+  props: {
+    receivedVariable: {
+      type: String,
+      required: true,
+    },
+  },
   mounted() {
     // Récupère l'élément que l'on souhaite suivre
     const titleH2 = document.getElementById("portfolio");

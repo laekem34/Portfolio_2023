@@ -5,8 +5,7 @@
       class="card g-white text-black shadow-10 rounded-border-30"
     >
       <NavCard @variable-changed="handleVariableChange" />
-      <HeaderCard />
-      <p>Variable reçue : {{ receivedVariable }}</p>
+      <HeaderCard :receivedVariable="receivedVariable" />
     </q-layout>
   </div>
 </template>
@@ -22,15 +21,16 @@ export default defineComponent({
     HeaderCard,
     NavCard,
   },
+  methods: {
+    handleVariableChange(val) {
+      this.receivedVariable = val;
+      this.$emit("variable-changed", this.receivedVariable); // Émettez l'événement avec la variable
+    },
+  },
   data() {
     return {
       receivedVariable: "",
     };
-  },
-  methods: {
-    handleVariableChange(variable) {
-      this.receivedVariable = variable;
-    },
   },
   setup() {
     const selectedLanguage = ref("FR");

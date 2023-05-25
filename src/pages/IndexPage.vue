@@ -1,7 +1,8 @@
 <template>
-  <Card />
-  <ThePortfolio />
-  <TheContact />
+  <Card @variable-changed="handleVariableChangeB" />
+
+  <ThePortfolio :receivedVariable="receivedVariable" />
+  <TheContact :receivedVariable="receivedVariable" />
 </template>
 
 <script>
@@ -16,6 +17,16 @@ export default defineComponent({
     Card,
     ThePortfolio,
     TheContact,
+  },
+  data() {
+    return {
+      receivedVariable: "", // Initialisez la valeur de receivedVariable
+    };
+  },
+  methods: {
+    handleVariableChangeB(value) {
+      this.receivedVariable = value;
+    },
   },
 });
 </script>

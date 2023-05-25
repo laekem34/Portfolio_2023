@@ -6,9 +6,11 @@
     <div class="row reverse-wrap q-px-xs-sm q-px-sm-xl q-py-xs-sm q-py-sm-md">
       <div class="col-12 col-sm-7">
         <div class="text-overline text-h1" data-v-8db16f10="">Florian Batt</div>
-        <p>{{ selectedLanguage }}</p>
+
+        <!-- For French version -->
         <div
-          id="title-header"
+          v-show="receivedVariable == 'FR'"
+          id="title-header-fr"
           class="wave-word text-h5 q-mt-sm q-mb-xs text-weight-bold"
         >
           <span>R</span>
@@ -57,8 +59,14 @@
           <span>o</span>
           <span>p</span>
           <span>s</span>
+        </div>
 
-          <!-- For English version
+        <!-- For English version -->
+        <div
+          v-show="receivedVariable == 'EN'"
+          id="title-header-en"
+          class="wave-word text-h5 q-mt-sm q-mb-xs text-weight-bold"
+        >
           <span>L</span>
           <span>o</span>
           <span>o</span>
@@ -101,17 +109,22 @@
           <span>p</span>
           <span>e</span>
           <span>r</span>
-        -->
-
-          <!--Looking for an intership as Web developer-->
         </div>
-        <div class="text-caption text-grey">
+
+        <!--Looking for an intership as Web developer-->
+
+        <div v-show="receivedVariable == 'FR'" class="text-caption text-grey">
           L'EPSI me soutient dans cette collaboration qui est pour moi une
           oppotunité tant pour la formation que pour mon avenir professionnel.
         </div>
+        <div v-show="receivedVariable == 'EN'" class="text-caption text-grey">
+          EPSI supports me in this collaboration, which is an opportunity for
+          both my education and professional future.
+        </div>
+        <!--
         <div class="row q-pa-md" style="">
           <div
-            v-for="(link, i) in linksList[FR]"
+            v-for="(link, i) in linksList['FR']"
             :key="i"
             class="col-xs-4 col-sm-3 col-md-2 col-xl-1 self-center"
           >
@@ -126,6 +139,7 @@
             </q-item-section>
           </div>
         </div>
+        -->
       </div>
 
       <div class="col-12 col-sm-5 q-pb-lg q-pb-sm-none flex flex-center">
@@ -186,7 +200,17 @@
         class="col-auto"
         padding="xs md"
         color="primary"
+        v-show="receivedVariable == 'FR'"
         label="Me contacter"
+        no-caps
+      />
+      <q-btn
+        id="btn-talk"
+        class="col-auto"
+        padding="xs md"
+        color="primary"
+        v-show="receivedVariable == 'EN'"
+        label="Let's talk"
         no-caps
       />
     </div>
@@ -202,8 +226,15 @@ import AstronautJSON from "../assets/Lottie-water.json";
 import { reactive, onMounted } from "vue";
 
 export default {
+  name: "HeaderCard",
   components: {
     // Vue3Lottie,
+  },
+  props: {
+    receivedVariable: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
@@ -247,10 +278,11 @@ export default {
         }
       }
 
-      const titreEl = document.querySelector("#title-header");
+      const titreElFr = document.querySelector("#title-header-fr");
+      const titreElEn = document.querySelector("#title-header-en");
 
-      setInterval(waveInt.bind(titreEl), 5000);
-
+      setInterval(waveInt.bind(titreElFr), 5000);
+      setInterval(waveInt.bind(titreElEn), 5000);
       function waveInt() {
         Array.from(this.childNodes)
           .filter((node) => node.nodeType === Node.ELEMENT_NODE)
