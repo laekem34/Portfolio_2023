@@ -6,13 +6,19 @@
           class="row reverse-wrap q-px-xs-sm q-px-sm-xl q-py-xs-sm q-py-sm-md"
         >
           <div class="col-12 col-sm-7">
-            <h2 class="text-boldn q-mt-none q-my-sm-xl">Me contacter</h2>
-            <!-- <div class="text-h5 q-mt-sm q-mb-xs text-weight-bold">
-            Titre d'accroche
-            </div>
-            <div class="text-caption text-grey">
-              Phrase d'accroche
-            </div>-->
+            <h2
+              v-show="receivedVariable == 'FR'"
+              class="text-boldn q-mt-none q-my-sm-xl"
+            >
+              Me contacter
+            </h2>
+            <h2
+              v-show="receivedVariable == 'EN'"
+              class="text-boldn q-mt-none q-my-sm-xl"
+            >
+              Let's talk !
+            </h2>
+
             <div class="row" style="">
               <div
                 v-for="(link, i) in linksList"
@@ -66,12 +72,24 @@
           class="row justify-between q-gutter-md q-pa-xs-sm q-pa-sm-xl q-py-xs-xl"
         >
           <q-btn
+            v-show="receivedVariable == 'FR'"
             :href="cvUrl"
             download="Portfolio-Florian-Batt.pdf"
             class="col-5"
             padding="md xl"
             color="primary"
             label="Télécharger mon CV"
+            icon="download"
+            no-caps
+          />
+          <q-btn
+            v-show="receivedVariable == 'EN'"
+            :href="cvUrl"
+            download="Portfolio-Florian-Batt.pdf"
+            class="col-5"
+            padding="md xl"
+            color="primary"
+            label="Download my CV"
             icon="download"
             no-caps
           />
@@ -128,13 +146,11 @@ export default defineComponent({
     const linksList = reactive([
       {
         title: "06474142934",
-
         icon: "phone",
         link: "tel:+330674142934",
       },
       {
         title: "florian.batt@hotmail.fr",
-
         icon: "mail",
         link: "mailto:florian.batt@hotmail.fr",
       },
@@ -145,6 +161,12 @@ export default defineComponent({
       cvUrl: cv,
       portfolioUrl: portfolio,
     };
+  },
+  props: {
+    receivedVariable: {
+      type: String,
+      required: true,
+    },
   },
   mounted() {
     const phoneEl = document.querySelector("#phone");
