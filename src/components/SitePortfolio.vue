@@ -44,23 +44,12 @@
             </div>
             <div id="btn" class="button col-12 self-end q-pt-xs-lg">
               <q-btn
-                v-show="receivedVariable == 'FR'"
                 :href="link"
                 target="_blank"
                 padding="xs md"
                 outline
                 color="primary"
-                label="Consulter"
-                no-caps
-              />
-              <q-btn
-                v-show="receivedVariable == 'EN'"
-                :href="link"
-                target="_blank"
-                padding="xs md"
-                outline
-                color="primary"
-                label="Go to the website"
+                :label="buttonList.button[receivedVariable]"
                 no-caps
               />
             </div>
@@ -84,15 +73,30 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
+  setup() {
+    const buttonList = reactive({
+      button: {
+        FR: "Consulter",
+        EN: "Go to the website",
+      },
+    });
+    return {
+      buttonList,
+    };
+  },
   props: {
     title: {
       type: String,
       required: true,
     },
     text: {
+      type: Array,
+      required: true,
+    },
+    button: {
       type: Array,
       required: true,
     },
