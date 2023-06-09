@@ -72,50 +72,15 @@
           class="row justify-between q-gutter-md q-pa-xs-sm q-pa-sm-xl q-py-xs-xl"
         >
           <q-btn
-            v-show="receivedVariable == 'FR'"
             :href="cvUrl"
             download="Portfolio-Florian-Batt.pdf"
             class="col-5"
             padding="md xl"
             color="primary"
-            label="Télécharger mon CV"
+            :label="buttonList.button[receivedVariable]"
             icon="download"
             no-caps
           />
-          <q-btn
-            v-show="receivedVariable == 'EN'"
-            :href="cvUrl"
-            download="Portfolio-Florian-Batt.pdf"
-            class="col-5"
-            padding="md xl"
-            color="primary"
-            label="Download my CV"
-            icon="download"
-            no-caps
-          />
-          <!--         
-            q-btn
-            :href="portfolioUrl"
-            download="Portfolio-Florian-Batt.pdf"
-            class="col-5"
-            padding="md xl"
-            outline
-            color="primary"
-            label="Download my portfolio"
-            icon="download"
-            no-caps
-          /> 
-          <q-btn
-            :href="cvUrl"
-            download="CV-Florian-Batt.pdf"
-            class="col-5 text-bold"
-            padding="md xl"
-            color="primary"
-            label="Download my resume"
-            icon="download"
-            no-caps
-          />
-          -->
         </div>
       </div>
     </q-layout>
@@ -155,11 +120,18 @@ export default defineComponent({
         link: "mailto:florian.batt@hotmail.fr",
       },
     ]);
+    const buttonList = reactive({
+      button: {
+        FR: "Télécharger mon CV",
+        EN: "Download my CV",
+      },
+    });
 
     return {
       linksList,
       cvUrl: cv,
       portfolioUrl: portfolio,
+      buttonList,
     };
   },
   props: {
