@@ -3,11 +3,28 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 
+// La variable locale peut être géré ici
 export default defineComponent({
   name: "App",
-  
+  data() {
+    return {
+      locale: 'FR'
+    }
+  },
+  provide() {
+    return {
+      // On fournit la variable à tous les enfants
+      // Ils l'a récupèreront avec un inject. voir NavCard.vue
+      locale: computed(() => this.locale)
+    }
+  },
+  methods: {
+    setLocale(locale) {
+      this.locale = locale
+    }
+  }
 });
 </script>
 
