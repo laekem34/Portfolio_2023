@@ -1,18 +1,19 @@
 <template>
   <h2
     id="portfolio"
-    class="text-h1 text-center"
+    ref="title"
+    class="text-h1 row justify-center relative-position"
     style="font-family: 'RobotoFlex', sans-serif"
   >
-    <span id="p">P</span>
-    <span id="o">o</span>
-    <span id="r">r</span>
-    <span id="t">t</span>
-    <span id="f">f</span>
-    <span id="o_2">o</span>
-    <span id="l">l</span>
-    <span id="i">i</span>
-    <span id="o_3">o</span>
+    <span class="block shadow absolute" :style="{ transform: `translate(-${titleTranslate[0]}px,-${titleTranslate[1]}px)`, zIndex: 1, filter: `blur(${titleTranslate[1] / 5}px)` }">
+      <span v-for="(letter, id) in 'portfolio'.split('')" :key="id" :style="{zIndex: id + 1}">{{  letter  }}</span>
+    </span>
+    <span class="block absolute" :style="{ transform: `translate(${titleTranslate[0]}px,${titleTranslate[1]}px)`, zIndex: 1 }">
+      <span v-for="(letter, id) in 'portfolio'.split('')" :key="id" :style="{zIndex: id + 2}">{{ letter }}</span>
+    </span>
+    <span class="block invisible non-selectable">
+      <span v-for="(letter, id) in 'portfolio'.split('')" :key="id">{{ letter }}</span>
+    </span>
   </h2>
 
   <div class="q-pa-xs-md q-pa-md-xl">
@@ -95,103 +96,106 @@ export default defineComponent({
       required: true,
     },
   },
+  methods: {
+    updateTranslate() {
+      // Récupère l'élément que l'on souhaite suivre
+      const titleH2 = this.$refs.title;
+      if (!titleH2) return
+
+      // Récupère la position de l'élément
+      const elementPosition = titleH2.getBoundingClientRect().top + window.scrollY;
+
+      // Calcule la position actuelle de l'élément par rapport au scroll
+      const currentPosition = Math.max(0, elementPosition - window.scrollY - 260);
+
+      this.titleTranslate = [currentPosition / 5, currentPosition / 10]
+    }
+  },
+  data() {
+    return {
+      scrollListener: null,
+      titleTranslate: [30, 15]
+    }
+  },
+  unmounted () {
+    if (this.scrollListener) window.removeEventListener(this.scrollListener)
+  },
   mounted() {
-    // Récupère l'élément que l'on souhaite suivre
-    const titleH2 = document.getElementById("portfolio");
-
-    // Récupère la position de l'élément
-    const elementPosition =
-      titleH2.getBoundingClientRect().top + window.scrollY;
-
-    // Calcule la position du milieu de l'écran
-    const middleOfScreen = window.innerHeight / 2;
-
-    // Calcule la position du quart de l'écran
-    const quaterOfScreen = window.innerHeight / 4;
-
-    // Calcule la position du quart de l'écran
-    const threequaterOfScreen = middleOfScreen + quaterOfScreen;
 
     // Ajoute un événement de scroll sur la fenêtre
     window.addEventListener("load", () => {
-      // Récupère la position actuelle de la fenêtre
-      const currentScrollPosition = window.scrollY;
-
-      // Calcule la position actuelle de l'élément par rapport au scroll
-      const currentPosition = elementPosition - currentScrollPosition;
-
+      this.updateTranslate()
       // Calcule la position actuelle de l'élément en pourcentage par rapport à la position de l'écran visible
-      const visiblePercentage =
-        ((window.innerHeight - currentPosition) / window.innerHeight) * 100;
-      monEvenement(visiblePercentage);
+      // const visiblePercentage =
+      //   ((window.innerHeight - currentPosition) / window.innerHeight) * 100;
+      // monEvenement(visiblePercentage);
     });
 
     // Ajoute un événement de scroll sur la fenêtre
-    window.addEventListener("scroll", () => {
+    this.scrollListener = window.addEventListener("scroll", () => {
+      this.updateTranslate()
       // Récupère la position actuelle de la fenêtre
-      const currentScrollPosition = window.scrollY;
-
+      // const currentScrollPosition = window.scrollY;
       // Calcule la position actuelle de l'élément par rapport au scroll
-      const currentPosition = elementPosition - currentScrollPosition;
-
+      // const currentPosition = elementPosition - currentScrollPosition;
       // Calcule la position actuelle de l'élément en pourcentage par rapport à la position de l'écran visible
-      const visiblePercentage =
-        ((window.innerHeight - currentPosition) / window.innerHeight) * 100;
+      // const visiblePercentage =
+      // ((window.innerHeight - currentPosition) / window.innerHeight) * 100;
 
       // Vérifie si la position actuelle de l'élément est dans la zone du milieu de l'écran
-      if (visiblePercentage > 0) {
+      // if (visiblePercentage > 0) {
         // L'élément se trouve au milieu de l'écran, déclenche l'événement
-        monEvenement(visiblePercentage);
-      }
+        // monEvenement(visiblePercentage);
+      // }
     });
 
     function monEvenement(visiblePercentage) {
       // Code à exécuter lorsque l'élément est au milieu de l'écran
-      const titleP = document.getElementById("p");
-      const titleO = document.getElementById("o");
-      const titleR = document.getElementById("r");
-      const titleT = document.getElementById("t");
-      const titleF = document.getElementById("f");
-      const titleO2 = document.getElementById("o_2");
-      const titleL = document.getElementById("l");
-      const titleI = document.getElementById("i");
-      const titleO3 = document.getElementById("o_3");
+      // const titleP = document.getElementById("p");
+      // const titleO = document.getElementById("o");
+      // const titleR = document.getElementById("r");
+      // const titleT = document.getElementById("t");
+      // const titleF = document.getElementById("f");
+      // const titleO2 = document.getElementById("o_2");
+      // const titleL = document.getElementById("l");
+      // const titleI = document.getElementById("i");
+      // const titleO3 = document.getElementById("o_3");
       // console.log(visiblePercentage * 8);
       // titleH2.style.opacity =
       //   Math.exp(Math.sqrt(visiblePercentage)) / Math.exp(Math.sqrt(100));
-      const Maxlimite = 800;
+      // const Maxlimite = 800;
 
       ///////////////////////////
       ////////EFFET CROISEMENT OMBRES/////////////////////////////////////////
       ///////////////////////////
 
-      let shadowB = 0;
-      shadowB = (titleH2.getBoundingClientRect().top - window.scrollY) / 50;
-      let shadow2 = -shadowB;
-      if (shadow2 > 0.2) {
-        shadow2 = 0.2;
-      }
-      if (shadowB < -0.2) {
-        shadowB = -0.2;
-      }
-      const widthOfScreen = window.innerWidth;
+      // let shadowB = 0;
+      // shadowB = (titleH2.getBoundingClientRect().top - window.scrollY) / 50;
+      // let shadow2 = -shadowB;
+      // if (shadow2 > 0.2) {
+      //   shadow2 = 0.2;
+      // }
+      // if (shadowB < -0.2) {
+      //   shadowB = -0.2;
+      // }
+      // const widthOfScreen = window.innerWidth;
       // let letterSpacing = (widthOfScreen * 0.001 * fontPlus) / 60;
-      let letterSpacing = widthOfScreen * 0.025;
-      if (widthOfScreen) {
-      }
-      console.log("S:" + shadowB);
-      titleH2.style.letterSpacing = letterSpacing + "px";
+      // let letterSpacing = widthOfScreen * 0.025;
+      // if (widthOfScreen) {
+      // }
+      // console.log("S:" + shadowB);
       // titleH2.style.letterSpacing = letterSpacing + "px";
-      titleH2.style.textShadow =
-        shadowB * 5 +
-        "px " +
-        shadowB +
-        "px 0px white" +
-        "," +
-        shadow2 * 5 +
-        "px " +
-        shadow2 +
-        "px 0px grey";
+      // titleH2.style.letterSpacing = letterSpacing + "px";
+      // titleH2.style.textShadow =
+      //   shadowB * 5 +
+      //   "px " +
+      //   shadowB +
+      //   "px 0px white" +
+      //   "," +
+      //   shadow2 * 5 +
+      //   "px " +
+      //   shadow2 +
+      //   "px 0px grey";
 
       // OPTION effet opacité
 
@@ -274,8 +278,12 @@ h2 {
 }
 #portfolio {
   font-size: 5em;
-  color: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255);
   margin-top: 16px;
   margin-bottom: 8px;
+  letter-spacing: 0.3em;
+}
+.shadow {
+  color: rgba(0, 0, 0, 0.5);
 }
 </style>
