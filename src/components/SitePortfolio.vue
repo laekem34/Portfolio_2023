@@ -10,7 +10,7 @@
         <div class="left col-12 col-md-7">
           <div
             id="test"
-            class="row wrap justify-center q-pl-xs-sm q-pl-sm-xl"
+            class="row wrap justify-center q-px-xs-sm q-px-sm-xl"
             style="height: 100%"
           >
             <div class="text col-12">
@@ -42,23 +42,12 @@
                 <span v-html="text"></span>
               </div>
             </div>
-            <div id="btn" class="button col-12 self-end q-pt-xs-lg">
-              <q-btn
-                :href="link"
-                target="_blank"
-                padding="xs md"
-                outline
-                color="primary"
-                :label="buttonList.button[receivedVariable]"
-                no-caps
-              />
-            </div>
           </div>
         </div>
 
         <div
           id="img"
-          class="right col-12 col-md-5 flex flex-center q-pl-md-lg q-pt-lg"
+          class="right col-12 col-md-5 flex flex-center q-px-xs-sm q-px-sm-xl q-pl-md-lg q-pt-lg"
         >
           <q-img
             :src="require(`../assets/${image}`)"
@@ -67,6 +56,18 @@
             class="rounded-borders"
           ></q-img>
         </div>
+      </div>
+
+      <div id="btn" class="button col-12 self-end q-pt-xs-lg q-pl-xs-sm q-pl-sm-xl">
+        <q-btn
+          :href="link"
+          target="_blank"
+          padding="xs md"
+          outline
+          color="primary"
+          :label="buttonList.button[receivedVariable]"
+          no-caps
+        />
       </div>
     </div>
   </q-layout>
@@ -123,23 +124,47 @@ export default defineComponent({
   },
   mounted() {
     //this.moveRightElement();
-    let img = document.getElementById("img");
-    let btn = document.getElementById("btn");
-    let test = document.getElementById("test");
-    let group = document.getElementById("group");
+
+    /**
+     * Cette partie peut être enlevé et relayé au css avec du display flex en découpant le composant comme ça plûtot
+     * en sortant le bouton de la div "#test"
+     * 
+     * En général, dans un composant vu, il vaut mieux ne pas utiliser document.getElementById pour récupérer un composant mais une ref
+     * Car dans ton cas tu instancis 2 fois le composant SitePorfolio et donc dans le DOM, tu les id en double
+     * 
+     * <div ref="maDiv">
+     * 
+     * Dans le js => this.$refs.maDiv    Equiv document.getElementById
+     * 
+     *  __________________________________________
+     * |  ___________________    ________________ |
+     * | |                   |  |                ||
+     * | |      Textes       |  |     image      ||
+     * | |___________________|  |________________||
+     * |  _______________________________________ |
+     * | | BTN                                   ||
+     * | |_______________________________________||
+     * |__________________________________________|
+     */
+
+
+    // let img = document.getElementById("img");
+    // let btn = document.getElementById("btn");
+    // let test = document.getElementById("test");
+    // let group = document.getElementById("group");
 
     // console.log(window.innerWidth);
-    window.addEventListener("load", function () {
-      window.dispatchEvent(new Event("resize"));
-    });
+    // window.addEventListener("load", function () {
+    //   window.dispatchEvent(new Event("resize"));
+    // });
 
-    window.onresize = function () {
-      if (window.innerWidth < 1024) {
-        test.insertBefore(img, btn);
-      } else {
-        group.appendChild(img);
-      }
-    };
+    // window.onresize = function () {
+    //   if (window.innerWidth < 1024) {
+    //     test.insertBefore(img, btn);
+    //   } else {
+    //     group.appendChild(img);
+    //   }
+    // };
   },
   methods: {},
 });
