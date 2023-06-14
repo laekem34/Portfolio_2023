@@ -5,24 +5,49 @@
     class="text-h1 row justify-center relative-position"
     style="font-family: 'RobotoFlex', sans-serif"
   >
-    <span class="block shadow absolute" :style="{ transform: `translate(-${titleTranslate[0]}px,-${titleTranslate[1]}px)`, zIndex: 1, filter: `blur(${titleTranslate[1] / 5}px)` }">
-      <span v-for="(letter, id) in 'portfolio'.split('')" :key="id" :style="{zIndex: id + 1}">{{  letter  }}</span>
+    <span
+      class="block shadow absolute"
+      :style="{
+        transform: `translate(-${titleTranslate[0]}px,-${titleTranslate[1]}px)`,
+        zIndex: 1,
+        filter: `blur(${titleTranslate[1] / 5}px)`,
+      }"
+    >
+      <span
+        v-for="(letter, id) in 'portfolio'.split('')"
+        :key="id"
+        :style="{ zIndex: id + 1 }"
+        >{{ letter }}</span
+      >
     </span>
-    <span class="block absolute" :style="{ transform: `translate(${titleTranslate[0]}px,${titleTranslate[1]}px)`, zIndex: 1 }">
-      <span v-for="(letter, id) in 'portfolio'.split('')" :key="id" :style="{zIndex: id + 2}">{{ letter }}</span>
+    <span
+      class="block absolute"
+      :style="{
+        transform: `translate(${titleTranslate[0]}px,${titleTranslate[1]}px)`,
+        zIndex: 1,
+      }"
+    >
+      <span
+        v-for="(letter, id) in 'portfolio'.split('')"
+        :key="id"
+        :style="{ zIndex: id + 2 }"
+        >{{ letter }}</span
+      >
     </span>
     <span class="block invisible non-selectable">
-      <span v-for="(letter, id) in 'portfolio'.split('')" :key="id">{{ letter }}</span>
+      <span v-for="(letter, id) in 'portfolio'.split('')" :key="id">{{
+        letter
+      }}</span>
     </span>
   </h2>
 
   <div class="q-pa-xs-md q-pa-md-xl">
     <SitePortfolio
-      :receivedVariable="receivedVariable"
+      :receivedVariable="locale"
       v-for="(links, index) in linksList"
       :key="index"
-      :title="links.title[receivedVariable]"
-      :text="links.text[receivedVariable]"
+      :title="links.title[locale]"
+      :text="links.text[locale]"
       :caption="links.caption"
       :icon="links.icon"
       :link="links.link"
@@ -32,7 +57,7 @@
 </template>
 
 <script>
-import { defineComponent, defineProps, reactive } from "vue";
+import { defineComponent, defineProps, reactive, inject } from "vue";
 import SitePortfolio from "src/components/SitePortfolio.vue";
 
 export default defineComponent({
@@ -41,6 +66,7 @@ export default defineComponent({
     SitePortfolio,
   },
   setup() {
+    const locale = inject("locale");
     const linksList = reactive([
       {
         title: {
@@ -82,6 +108,7 @@ export default defineComponent({
 
     return {
       linksList,
+      locale,
     };
   },
   props: defineProps({
@@ -100,31 +127,34 @@ export default defineComponent({
     updateTranslate() {
       // Récupère l'élément que l'on souhaite suivre
       const titleH2 = this.$refs.title;
-      if (!titleH2) return
+      if (!titleH2) return;
 
       // Récupère la position de l'élément
-      const elementPosition = titleH2.getBoundingClientRect().top + window.scrollY;
+      const elementPosition =
+        titleH2.getBoundingClientRect().top + window.scrollY;
 
       // Calcule la position actuelle de l'élément par rapport au scroll
-      const currentPosition = Math.max(0, elementPosition - window.scrollY - 260);
+      const currentPosition = Math.max(
+        0,
+        elementPosition - window.scrollY - 260
+      );
 
-      this.titleTranslate = [currentPosition / 5, currentPosition / 10]
-    }
+      this.titleTranslate = [currentPosition / 5, currentPosition / 10];
+    },
   },
   data() {
     return {
       scrollListener: null,
-      titleTranslate: [30, 15]
-    }
+      titleTranslate: [30, 15],
+    };
   },
-  unmounted () {
-    if (this.scrollListener) window.removeEventListener(this.scrollListener)
+  unmounted() {
+    if (this.scrollListener) window.removeEventListener(this.scrollListener);
   },
   mounted() {
-
     // Ajoute un événement de scroll sur la fenêtre
     window.addEventListener("load", () => {
-      this.updateTranslate()
+      this.updateTranslate();
       // Calcule la position actuelle de l'élément en pourcentage par rapport à la position de l'écran visible
       // const visiblePercentage =
       //   ((window.innerHeight - currentPosition) / window.innerHeight) * 100;
@@ -133,7 +163,7 @@ export default defineComponent({
 
     // Ajoute un événement de scroll sur la fenêtre
     this.scrollListener = window.addEventListener("scroll", () => {
-      this.updateTranslate()
+      this.updateTranslate();
       // Récupère la position actuelle de la fenêtre
       // const currentScrollPosition = window.scrollY;
       // Calcule la position actuelle de l'élément par rapport au scroll
@@ -144,8 +174,8 @@ export default defineComponent({
 
       // Vérifie si la position actuelle de l'élément est dans la zone du milieu de l'écran
       // if (visiblePercentage > 0) {
-        // L'élément se trouve au milieu de l'écran, déclenche l'événement
-        // monEvenement(visiblePercentage);
+      // L'élément se trouve au milieu de l'écran, déclenche l'événement
+      // monEvenement(visiblePercentage);
       // }
     });
 
@@ -164,11 +194,9 @@ export default defineComponent({
       // titleH2.style.opacity =
       //   Math.exp(Math.sqrt(visiblePercentage)) / Math.exp(Math.sqrt(100));
       // const Maxlimite = 800;
-
       ///////////////////////////
       ////////EFFET CROISEMENT OMBRES/////////////////////////////////////////
       ///////////////////////////
-
       // let shadowB = 0;
       // shadowB = (titleH2.getBoundingClientRect().top - window.scrollY) / 50;
       // let shadow2 = -shadowB;
@@ -196,18 +224,13 @@ export default defineComponent({
       //   "px " +
       //   shadow2 +
       //   "px 0px grey";
-
       // OPTION effet opacité
-
       // titleH2.style.opacity = visiblePercentage / 20 - 1;
-
       ////////////
       ////////EFFET 3D/////////////////////////////////////////
       ////////////
-
       // let fontPlus = 600;
       // let shadowB = 0;
-
       // if (visiblePercentage < 50) {
       //   console.log("<50");
       //   // fontPlus = 400 + visiblePercentage * 4;
@@ -236,7 +259,6 @@ export default defineComponent({
       //   "px " +
       //   shadow2 / 4 +
       //   "px 0px grey";
-
       // titleP.style.fontWeight = fontPlus;
       // titleO.style.fontWeight = fontPlus;
       // titleR.style.fontWeight = fontPlus;

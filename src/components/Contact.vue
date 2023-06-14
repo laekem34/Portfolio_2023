@@ -6,16 +6,10 @@
           class="row reverse-wrap q-px-xs-sm q-px-sm-xl q-py-xs-sm q-py-sm-md"
         >
           <div class="col-12 col-sm-7">
-            <h2
-              v-show="receivedVariable == 'FR'"
-              class="text-boldn q-mt-none q-my-sm-xl"
-            >
+            <h2 v-show="locale == 'FR'" class="text-boldn q-mt-none q-my-sm-xl">
               Me contacter
             </h2>
-            <h2
-              v-show="receivedVariable == 'EN'"
-              class="text-boldn q-mt-none q-my-sm-xl"
-            >
+            <h2 v-show="locale == 'EN'" class="text-boldn q-mt-none q-my-sm-xl">
               Let's talk !
             </h2>
 
@@ -77,7 +71,7 @@
             class="col-5"
             padding="md xl"
             color="primary"
-            :label="buttonList.button[receivedVariable]"
+            :label="buttonList.button[locale]"
             icon="download"
             no-caps
           />
@@ -90,7 +84,7 @@
 <script>
 import cv from "../assets/CV_Florian_Batt_2023.pdf";
 import portfolio from "../assets/portfolio.pdf";
-import { defineComponent } from "vue";
+import { defineComponent, inject } from "vue";
 import { reactive } from "vue";
 import { Vue3Lottie } from "vue3-lottie";
 import "vue3-lottie/dist/style.css";
@@ -108,6 +102,7 @@ export default defineComponent({
     };
   },
   setup() {
+    const locale = inject("locale");
     const linksList = reactive([
       {
         title: "06474142934",
@@ -132,6 +127,7 @@ export default defineComponent({
       cvUrl: cv,
       portfolioUrl: portfolio,
       buttonList,
+      locale,
     };
   },
   props: {
