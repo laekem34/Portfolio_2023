@@ -8,9 +8,9 @@
     <span
       class="block shadow absolute"
       :style="{
-        transform: `translate(-${titleTranslate[0]}px,-${titleTranslate[1]}px)`,
+        // transform: `translate(-${titleTranslate[0]}px,-${titleTranslate[1]}px)`,
         zIndex: 1,
-        filter: `blur(${titleTranslate[1] / 5}px)`,
+        filter: `blur(${titleTranslate[1]}px)`,
       }"
     >
       <span
@@ -23,7 +23,9 @@
     <span
       class="block absolute"
       :style="{
-        transform: `translate(${titleTranslate[0]}px,${titleTranslate[1]}px)`,
+        transform: `translate(${titleTranslate[0] + 1}px,${
+          titleTranslate[1] + 1
+        }px)`,
         zIndex: 1,
       }"
     >
