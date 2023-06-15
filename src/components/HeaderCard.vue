@@ -9,7 +9,7 @@
 
         <!-- For French version -->
         <div
-          v-show="receivedVariable == 'FR'"
+          v-show="locale == 'FR'"
           id="title-header-fr"
           class="wave-word text-h5 q-mt-sm q-mb-xs text-weight-bold"
         >
@@ -63,7 +63,7 @@
 
         <!-- For English version -->
         <div
-          v-show="receivedVariable == 'EN'"
+          v-show="locale == 'EN'"
           id="title-header-en"
           class="wave-word text-h5 q-mt-sm q-mb-xs text-weight-bold"
         >
@@ -113,11 +113,11 @@
 
         <!--Looking for an intership as Web developer-->
 
-        <div v-show="receivedVariable == 'FR'" class="text-caption text-grey">
+        <div v-show="locale == 'FR'" class="text-caption text-grey">
           L'EPSI me soutient dans cette collaboration qui est pour moi une
           oppotunité tant pour la formation que pour mon avenir professionnel.
         </div>
-        <div v-show="receivedVariable == 'EN'" class="text-caption text-grey">
+        <div v-show="locale == 'EN'" class="text-caption text-grey">
           EPSI supports me in this collaboration, which is an opportunity for
           both my education and professional future.
         </div>
@@ -223,7 +223,7 @@ import "vue3-lottie/dist/style.css";
 
 import AstronautJSON from "../assets/Lottie-water.json";
 
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, inject } from "vue";
 
 export default {
   name: "HeaderCard",
@@ -242,6 +242,7 @@ export default {
     };
   },
   setup() {
+    const locale = inject("locale");
     const linksList = reactive([
       {
         title: "Bonjour, je suis Florian",
@@ -303,6 +304,7 @@ export default {
 
     return {
       linksList,
+      locale,
     };
   },
 };
